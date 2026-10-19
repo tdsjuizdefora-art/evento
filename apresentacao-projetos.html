@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<title>Guia de Apresentação de Projetos — Desafio de Desenvolvimento Web</title>
+<style>
+  :root{
+    --bg:#0b1020;
+    --bg-2:#111a33;
+    --card:#141d38;
+    --card-2:#1a2547;
+    --line:#26325c;
+    --ink:#e8ecf8;
+    --ink-2:#a9b4d0;
+    --accent:#6ea8fe;
+    --accent-2:#8b5cf6;
+    --ok:#34d399;
+    --radius:16px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --focus:0 0 0 3px rgba(110,168,254,.55);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(139,92,246,.18), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(110,168,254,.16), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:var(--accent); text-underline-offset:3px}
+  a:hover{color:#9ec2ff}
+
+  /* Skip link — acessibilidade WCAG 2.4.1 */
+  .skip-link{
+    position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+  }
+  .skip-link:focus{
+    position:fixed; left:16px; top:16px; width:auto; height:auto;
+    padding:12px 16px; background:#fff; color:#000; border-radius:10px; z-index:9999;
+    box-shadow:var(--focus);
+  }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:24px 20px 80px}
+
+  header.hero{
+    padding:32px 20px 8px;
+    text-align:left;
+  }
+  .eyebrow{
+    display:inline-block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); background:rgba(110,168,254,.12);
+    border:1px solid rgba(110,168,254,.35); padding:6px 12px; border-radius:999px;
+    font-weight:700;
+  }
+  h1{font-size:clamp(1.6rem, 4vw, 2.4rem); line-height:1.2; margin:14px 0 8px}
+  .lede{color:var(--ink-2); max-width:70ch; margin:0}
+
+  .grid{
+    display:grid; gap:16px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-top:22px;
+  }
+
+  .card{
+    background:linear-gradient(180deg, var(--card), var(--card-2));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+    box-shadow:var(--shadow);
+  }
+  .card h2, .card h3{margin:0 0 8px; font-size:1.05rem}
+  .card p{margin:0 0 8px; color:var(--ink-2)}
+
+  .stat{display:flex; align-items:baseline; gap:10px}
+  .stat b{font-size:1.7rem; color:#fff}
+  .stat span{color:var(--ink-2); font-size:.9rem}
+
+  /* Timeline de blocos por slide */
+  .timeline{list-style:none; padding:0; margin:16px 0 0; display:grid; gap:12px}
+  .timeline li{
+    display:grid; grid-template-columns:64px 1fr auto; gap:12px; align-items:start;
+    background:rgba(255,255,255,.02); border:1px solid var(--line);
+    border-radius:12px; padding:12px 14px;
+  }
+  .num{
+    width:40px; height:40px; border-radius:10px; display:grid; place-items:center;
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#0b1020; font-weight:800; font-size:1rem;
+  }
+  .timeline h3{margin:0 0 4px; font-size:.98rem}
+  .timeline p{margin:0; color:var(--ink-2); font-size:.92rem}
+  .badge-time{
+    font-variant-numeric:tabular-nums; font-weight:700; font-size:.85rem;
+    background:rgba(52,211,153,.12); color:var(--ok);
+    border:1px solid rgba(52,211,153,.35);
+    padding:4px 10px; border-radius:999px; white-space:nowrap;
+  }
+
+  .rules{list-style:none; padding:0; margin:12px 0 0; display:grid; gap:10px}
+  .rules li{display:flex; gap:10px; align-items:flex-start; color:var(--ink-2)}
+  .rules li::before{
+    content:"✓"; flex:0 0 24px; height:24px; border-radius:50%;
+    display:grid; place-items:center; font-size:.8rem; font-weight:800;
+    background:rgba(52,211,153,.15); color:var(--ok);
+    border:1px solid rgba(52,211,153,.4);
+  }
+
+  /* Bloco de link + botão copiar */
+  .copy-row{
+    display:flex; gap:10px; align-items:stretch; flex-wrap:wrap;
+    background:rgba(0,0,0,.25); border:1px solid var(--line); border-radius:12px;
+    padding:10px; margin-top:10px;
+  }
+  .copy-row input{
+    flex:1 1 280px; min-width:0;
+    background:transparent; border:0; color:var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:.86rem; padding:8px 10px; outline:none;
+  }
+  .copy-row input:focus{box-shadow:var(--focus); border-radius:8px}
+  button{
+    font:inherit; cursor:pointer; border-radius:10px; border:1px solid transparent;
+    padding:10px 16px; font-weight:700; transition:transform .06s ease, filter .15s ease;
+  }
+  button:active{transform:translateY(1px)}
+  button:focus-visible{outline:none; box-shadow:var(--focus)}
+  .btn-primary{background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b1020}
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-ghost{background:rgba(255,255,255,.06); color:var(--ink); border-color:var(--line)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1)}
+  .btn-ok{background:rgba(52,211,153,.2); color:var(--ok); border-color:rgba(52,211,153,.5)}
+
+  .link-label{font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); font-weight:700; margin-top:16px}
+  .link-label:first-of-type{margin-top:4px}
+
+  /* Tabela de cronograma */
+  .table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; margin-top:12px}
+  table{width:100%; border-collapse:collapse; min-width:520px; font-size:.95rem}
+  thead th{
+    background:rgba(255,255,255,.04); text-align:left; padding:12px 14px;
+    font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2);
+    border-bottom:1px solid var(--line);
+  }
+  tbody td{padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.04)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+  .tag{font-size:.78rem; padding:3px 9px; border-radius:999px; border:1px solid; font-weight:700; white-space:nowrap}
+  .tag-ok{color:var(--ok); border-color:rgba(52,211,153,.5); background:rgba(52,211,153,.12)}
+
+  /* Accordion acessível */
+  details{
+    border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02);
+    padding:0; margin-top:12px; overflow:hidden;
+  }
+  details + details{margin-top:10px}
+  summary{
+    cursor:pointer; padding:14px 16px; font-weight:700; list-style:none;
+    display:flex; justify-content:space-between; gap:10px; align-items:center;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+"; font-size:1.2rem; color:var(--accent)}
+  details[open] summary::after{content:"–"}
+  details > .panel{padding:0 16px 16px; color:var(--ink-2)}
+  details > .panel ol{margin:8px 0 0; padding-left:20px}
+  details > .panel li{margin:4px 0}
+
+  footer{margin-top:40px; color:var(--ink-2); font-size:.85rem; text-align:center; border-top:1px solid var(--line); padding-top:16px}
+
+  /* Toast de feedback do copiar */
+  .toast{
+    position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
+    background:#0f172a; color:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:12px 18px; box-shadow:var(--shadow); opacity:0; pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease; z-index:1000; font-size:.9rem;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  /* Ajustes finos para telas pequenas */
+  @media (max-width: 600px){
+    .timeline li{grid-template-columns:48px 1fr; }
+    .timeline .badge-time{grid-column:2; justify-self:start}
+    .num{width:36px; height:36px; font-size:.9rem}
+    h1{font-size:1.4rem}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important}
+  }
+
+  @media print{
+    body{background:#fff; color:#000}
+    .card{box-shadow:none; background:#fff; border-color:#ccc}
+    .copy-row, button, .toast{display:none}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+<header class="hero">
+  <div class="wrap" style="padding-bottom:0">
+    <span class="eyebrow">Desafio de Desenvolvimento Web</span>
+    <h1>Como apresentar seu projeto — guia rápido e interativo</h1>
+    <p class="lede">
+      Modelo único de apresentação em <strong>5 slides</strong>, com tempos definidos, regras simples
+      e cronograma dos dias <strong>29 e 30 de outubro</strong>. Este material é um laboratório:
+      copie o link do template, ajuste os campos com seus dados e ensaie no tempo indicado.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Tempo total</h2>
+        <div class="stat"><b>13 min</b><span>por projeto</span></div>
+        <p style="margin-top:6px">Sendo <strong>10 min</strong> de apresentação orientada pelos slides, <strong>1 min</strong> de transição (fora do palco) e <strong>2 min</strong> para perguntas.</p>
+      </div>
+      <div class="card">
+        <h2>Formato</h2>
+        <div class="stat"><b>5 slides</b><span>+ telas de apoio</span></div>
+        <p style="margin-top:6px">O template orienta a fala. A demonstração ao vivo é o núcleo — não é apresentação de slides com prints.</p>
+      </div>
+      <div class="card">
+        <h2>Ferramentas aceitas</h2>
+        <div class="stat"><b>3 opções</b><span>compatíveis</span></div>
+        <p style="margin-top:6px">Google Apresentações (com link de cópia), Canva ou LibreOffice Impress.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo" class="wrap">
+
+  <!-- ============ BLOCO 1: TEMPLATE ============ -->
+  <section aria-labelledby="template-title">
+    <div class="card">
+      <h2 id="template-title">Template padrão — 5 slides</h2>
+      <p>
+        Cada bloco abaixo indica o objetivo do slide e o tempo de fala. O tempo somado dá <strong>10 minutos</strong>
+        de apresentação; os 3 minutos restantes são transição + perguntas.
+      </p>
+
+      <ol class="timeline">
+        <li>
+          <div class="num" aria-hidden="true">1</div>
+          <div>
+            <h3>Apresentação do projeto</h3>
+            <p>Nome do projeto, categoria, nome da equipe ou participante, integrantes e turma.</p>
+          </div>
+          <span class="badge-time" aria-label="1 minuto">1 min</span>
+        </li>
+        <li>
+          <div class="num" aria-hidden="true">2</div>
+          <div>
+            <h3>Problema e objetivo</h3>
+            <p>Qual necessidade motivou o projeto, para quem foi feito e o que pretende resolver ou proporcionar.</p>
+          </div>
+          <span class="badge-time" aria-label="1 minuto">1 min</span>
+        </li>
+        <li>
+          <div class="num" aria-hidden="true">3</div>
+          <div>
+            <h3>A solução</h3>
+            <p>Principais funcionalidades, telas ou recursos mais importantes e o diferencial da proposta.</p>
+          </div>
+          <span class="badge-time" aria-label="2 minutos">2 min</span>
+        </li>
+        <li>
+          <div class="num" aria-hidden="true">4</div>
+          <div>
+            <h3>Demonstração prática</h3>
+            <p>Abrir a aplicação funcionando, executar as funcionalidades, mostrar um fluxo real e informar o link do projeto.</p>
+          </div>
+          <span class="badge-time" aria-label="4 minutos">4 min</span>
+        </li>
+        <li>
+          <div class="num" aria-hidden="true">5</div>
+          <div>
+            <h3>Tecnologias e aprendizados</h3>
+            <p>Tecnologias usadas, dificuldades enfrentadas, o que aprenderam e próximas melhorias.</p>
+          </div>
+          <span class="badge-time" aria-label="2 minutos">2 min</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 2: REGRAS ============ -->
+  <section aria-labelledby="regras-title" style="margin-top:22px">
+    <div class="card">
+      <h2 id="regras-title">Regras simples do template</h2>
+      <ul class="rules">
+        <li>Máximo de 5 slides, além de eventuais telas de apoio (sem contagem no tempo).</li>
+        <li>Todos devem participar da apresentação, quando houver equipe.</li>
+        <li>A demonstração prática é obrigatória, mesmo que o projeto ainda não esteja totalmente concluído.</li>
+        <li>Se a aplicação não estiver funcionando no momento, pode ser apresentado um vídeo ou capturas de tela como alternativa.</li>
+        <li>O código-fonte pode ser mostrado se ajudar a explicar uma funcionalidade — mas não é necessário apresentar linha por linha.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 3: ROTEIRO DA DEMONSTRAÇÃO ============ -->
+  <section aria-labelledby="demo-title" style="margin-top:22px">
+    <div class="card">
+      <h2 id="demo-title">Roteiro sugerido da demonstração (slide 4)</h2>
+      <p>Use esta sequência para não se perder no tempo:</p>
+
+      <details open>
+        <summary>Passo 1 — Tela inicial</summary>
+        <div class="panel"><ol>
+          <li>Abra a aplicação publicada (GitHub Pages / Vercel) numa aba já preparada.</li>
+          <li>Apresente o layout visual inicial em 15–20 segundos.</li>
+        </ol></div>
+      </details>
+
+      <details>
+        <summary>Passo 2 — Execução das funcionalidades</summary>
+        <div class="panel"><ol>
+          <li>Clique nos botões, preencha formulários, use filtros ou recursos principais.</li>
+          <li>Comente o que cada interação faz — sem abrir o código ainda.</li>
+        </ol></div>
+      </details>
+
+      <details>
+        <summary>Passo 3 — Fluxo real do usuário</summary>
+        <div class="panel"><ol>
+          <li>Simule um cenário completo do início ao fim (busca → seleção → confirmação, por exemplo).</li>
+          <li>Mostre um caso de erro/validação, se existir — ajuda a explicar lógica.</li>
+        </ol></div>
+      </details>
+
+      <details>
+        <summary>Passo 4 — Responsividade</summary>
+        <div class="panel"><ol>
+          <li>Abra o DevTools (F12) e ative o modo dispositivo (Ctrl+Shift+M).</li>
+          <li>Alterne entre 375 px e 768 px rapidamente para mostrar a adaptação.</li>
+        </ol></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 4: LINK DO TEMPLATE ============ -->
+  <section aria-labelledby="links-title" style="margin-top:22px">
+    <div class="card">
+      <h2 id="links-title">Template — copiar com um clique</h2>
+
+      <p class="link-label">Google Apresentações</p>
+      <div class="copy-row">
+        <input
+          id="input-template"
+          type="text"
+          readonly
+          value="https://docs.google.com/presentation/d/10AcShQD3wY9KyU_MzbYRImJSyYeIYgy_AGFLu8NkxO8/edit?usp=sharing"
+          aria-label="Link do template no Google Apresentações"
+          onclick="this.select()">
+        <button type="button" class="btn-primary" data-copy-target="input-template">Copiar link</button>
+        <a class="btn-ghost" style="display:inline-flex; align-items:center; padding:10px 16px; text-decoration:none; border-radius:10px; font-weight:700"
+           href="https://docs.google.com/presentation/d/10AcShQD3wY9KyU_MzbYRImJSyYeIYgy_AGFLu8NkxO8/edit?usp=sharing"
+           target="_blank" rel="noopener noreferrer">Abrir</a>
+      </div>
+      <p style="margin-top:8px; font-size:.88rem">
+        Como usar: <strong>Arquivo → Fazer uma cópia → Apresentação inteira</strong>.
+        A cópia ficará na conta Google do estudante, que poderá editar livremente.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 5: CRONOGRAMA ============ -->
+  <section aria-labelledby="crono-title" style="margin-top:22px">
+    <div class="card">
+      <h2 id="crono-title">Cronograma — 29 e 30 de outubro</h2>
+      <p>
+        Estimativa com <strong>13 min por apresentação</strong>, sem incluir abertura, intervalos nem encerramento.
+        Os quantitativos dependem da confirmação dos inscritos e dos horários das turmas.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only" style="position:absolute; left:-9999px">
+            Cronograma de apresentações por dia
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Data</th>
+              <th scope="col">Apresentações</th>
+              <th scope="col">Programação</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>29/10 — quinta-feira</strong></td>
+              <td id="cell-dia29">11</td>
+              <td>1h45</td>
+              <td><span class="tag tag-ok" id="tag-dia29">Confirmado</span></td>
+            </tr>
+            <tr>
+              <td><strong>30/10 — sexta-feira</strong></td>
+              <td id="cell-dia30">8</td>
+              <td>1h45</td>
+              <td><span class="tag tag-ok" id="tag-dia30">Confirmado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 6: ENCERRAMENTO ============ -->
+  <div class="card" style="margin-top:22px; text-align:center">
+    <h2 style="justify-content:center">Pronto para começar?</h2>
+    <p style="max-width:60ch; margin:0 auto 14px">
+      Faça uma cópia do template, preencha os campos com os dados da sua equipe e ensaie respeitando os tempos.
+      Lembre-se: <strong>a demonstração é o coração da apresentação</strong>.
+    </p>
+    <a href="https://docs.google.com/presentation/d/10AcShQD3wY9KyU_MzbYRImJSyYeIYgy_AGFLu8NkxO8/copy"
+       target="_blank" rel="noopener noreferrer"
+       class="btn-primary" style="display:inline-block; text-decoration:none">
+      Fazer uma cópia do template
+    </a>
+  </div>
+
+</main>
+
+<footer class="wrap" style="padding-top:0">
+  Documento interativo — Desafio de Desenvolvimento Web · Turma 261A — tarde ·
+  Fonte: <a href="https://docs.google.com/presentation/d/10AcShQD3wY9KyU_MzbYRImJSyYeIYgy_AGFLu8NkxO8/edit?usp=sharing"
+            target="_blank" rel="noopener noreferrer">Google Apresentações — template oficial</a>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Link copiado!</div>
+
+<script>
+  /* ============================================================
+     CONFIG — ponto único de edição. Aluno NÃO precisa tocar aqui.
+     ============================================================ */
+  const CONFIG = {
+    dia29: 11,
+    dia30: 8
+  };
+
+  /* ---------- Copiar para a área de transferência ---------- */
+  const toast = document.getElementById("toast");
+  let toastTimer = null;
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+  }
+
+  async function copyFromInput(inputEl, btn){
+    if (!inputEl) return;
+    const value = (inputEl.value || "").trim();
+    if (!value){
+      showToast("Nada para copiar.");
+      return;
+    }
+    try{
+      // Preferência: API moderna
+      if (navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(value);
+      } else {
+        // Fallback para http:// e navegadores antigos
+        inputEl.removeAttribute("readonly");
+        inputEl.select();
+        document.execCommand("copy");
+        inputEl.setAttribute("readonly","readonly");
+      }
+      const original = btn.textContent;
+      btn.textContent = "Copiado ✓";
+      btn.classList.add("btn-ok");
+      showToast("Link copiado para a área de transferência.");
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove("btn-ok");
+      }, 1800);
+    }catch(err){
+      showToast("Não foi possível copiar automaticamente. Selecione o texto e use Ctrl+C.");
+    }
+  }
+
+  document.querySelectorAll("[data-copy-target]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const input = document.getElementById(btn.dataset.copyTarget);
+      copyFromInput(input, btn);
+    });
+  });
+
+  /* ---------- Cronograma dinâmico a partir do CONFIG ---------- */
+  (function setupCronograma(){
+    const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+    set("cell-dia29", CONFIG.dia29);
+    set("cell-dia30", CONFIG.dia30);
+  })();
+
+  /* ---------- Foco visível em input copiado ---------- */
+  document.querySelectorAll(".copy-row input").forEach(input => {
+    input.addEventListener("focus", () => input.select());
+  });
+</script>
+</body>
+</html>
