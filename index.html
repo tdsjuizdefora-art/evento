@@ -301,11 +301,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
-      color: #38bdf8;
+      font-size: 1.9rem;
+      line-height: 1;
       background: rgba(56, 189, 248, 0.15);
       border: 1px solid rgba(56, 189, 248, 0.35);
       flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
     }
 
     .instrucoes-texto h2 {
@@ -563,6 +564,21 @@
       transform: translateY(-2px);
     }
 
+    /* Botão desativado (inscrições encerradas) */
+    .btn-destaque-principal.btn-desativado,
+    .btn-destaque-principal.btn-desativado:hover {
+      background: linear-gradient(135deg, #3a4150, #4b5563);
+      color: #cbd5e1;
+      box-shadow: none;
+      animation: none;
+      transform: none;
+      cursor: not-allowed;
+      pointer-events: none;
+      opacity: 0.7;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      filter: grayscale(0.4);
+    }
+
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.5); }
       50% { box-shadow: 0 0 0 10px rgba(234, 88, 12, 0); }
@@ -663,7 +679,7 @@
       .instrucoes-icone {
         width: 48px;
         height: 48px;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
       .instrucoes-texto h2 { font-size: 1.05rem; }
       .instrucoes-texto p { font-size: 0.9rem; }
@@ -750,9 +766,9 @@
           </div>
 
           <div class="cta-inscricao-box">
-            <a href="https://forms.gle/rPDU5m793RsWAAQQ8" target="_blank" rel="noopener noreferrer" class="btn btn-destaque-principal">
-              <i class="fas fa-paper-plane" aria-hidden="true"></i> FAÇA SUA INSCRIÇÃO AQUI
-            </a>
+            <span class="btn btn-destaque-principal btn-desativado" role="button" aria-disabled="true" tabindex="-1" title="Inscrições encerradas">
+              <i class="fas fa-lock" aria-hidden="true"></i> INSCRIÇÕES ENCERRADAS
+            </span>
           </div>
         </div>
       </div>
@@ -765,7 +781,7 @@
       <div class="container">
         <div class="card-instrucoes">
           <div class="instrucoes-icone" aria-hidden="true">
-            <i class="fas fa-presentation-screen"></i>
+            📊
           </div>
 
           <div class="instrucoes-texto">
